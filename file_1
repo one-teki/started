@@ -1,0 +1,24 @@
+#!/user/bin/env python
+#-*-coding:utf-8 -*-
+
+import pygame
+from pygame.locals import *
+
+#colors (Red, Green, Blue)
+Black = (0, 0, 0)
+ORANGE=(255, 120, 0)
+YELLOW=(255, 255, 0)
+CYAN  =(0, 255, 255)
+
+class Hexagon:
+"""
+"""
+
+VERTEXES = (1,0), (3,0),(4,1),(3,2),(1,2),(0,1)
+
+def __init__(self, size):
+    self.SIZE = size
+    self.HALF = size*1//2
+    self.QUARTER = size*1//4
+    self>WIDTH =size*3//4
+    self.HEIGHT = size
