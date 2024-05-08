@@ -10,26 +10,29 @@ Use this app to prioritize your tasks.
 Input tasks and select their importance and urgency, and they will automatically be categorized in the Eisenhower Matrix.
 """)
 
+# セッションステートの初期化
+if "tasks" not in st.session_state:
+    st.session_state["tasks"] = pd.DataFrame(columns=["Task", "Importance", "Urgency"])
+
+if "task_input" not in st.session_state:
+    st.session_state["task_input"] = ""
+
+def reset_task_input():
+    st.session_state["task_input"] = ""
+
 # タスクの入力セクション
 with st.form("task_form"):
-    task_input = st.text_input("Enter a task", key="task_input")
+    task_input = st.text_input("Enter a task", st.session_state["task_input"], key="task_input")
     importance = st.selectbox("Importance", ["Low", "High"], key="importance")
     urgency = st.selectbox("Urgency", ["Low", "High"], key="urgency")
 
     # フォームの送信ボタン
-    submitted = st.form_submit_button("Add Task")
-
-# タスクを保存するデータフレームをセッションステートで保持
-if "tasks" not in st.session_state:
-    st.session_state["tasks"] = pd.DataFrame(columns=["Task", "Importance", "Urgency"])
+    submitted = st.form_submit_button("Add Task", on_click=reset_task_input)
 
 # フォームが送信されたら、タスクをデータフレームに追加
-if submitted and st.session_state.task_input:
-    new_task = pd.DataFrame([[st.session_state.task_input, st.session_state.importance, st.session_state.urgency]], columns=["Task", "Importance", "Urgency"])
+if submitted and task_input:
+    new_task = pd.DataFrame([[task_input, st.session_state["importance"], st.session_state["urgency"]]], columns=["Task", "Importance", "Urgency"])
     st.session_state["tasks"] = pd.concat([st.session_state["tasks"], new_task], ignore_index=True)
-
-    # タスク入力欄をリセット
-    st.session_state.task_input = ""
 
 # 関数：テーブルの表示
 def display_dataframe(df):
