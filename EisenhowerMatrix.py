@@ -17,6 +17,13 @@ if "tasks" not in st.session_state:
 if "task_input" not in st.session_state:
     st.session_state["task_input"] = ""
 
+if "importance" not in st.session_state:
+    st.session_state["importance"] = "Low"
+
+if "urgency" not in st.session_state:
+    st.session_state["urgency"] = "Low"
+
+# タスク入力リセット関数
 def reset_task_input():
     st.session_state["task_input"] = ""
 
@@ -31,7 +38,7 @@ with st.form("task_form"):
 
 # フォームが送信されたら、タスクをデータフレームに追加
 if submitted and task_input:
-    new_task = pd.DataFrame([[task_input, st.session_state["importance"], st.session_state["urgency"]]], columns=["Task", "Importance", "Urgency"])
+    new_task = pd.DataFrame([[task_input, importance, urgency]], columns=["Task", "Importance", "Urgency"])
     st.session_state["tasks"] = pd.concat([st.session_state["tasks"], new_task], ignore_index=True)
 
 # 関数：テーブルの表示
