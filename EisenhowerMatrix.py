@@ -61,18 +61,34 @@ col3, col4 = st.columns([1, 1], gap="medium")
 with col1:
     st.markdown('<div class="column1">', unsafe_allow_html=True)
     st.subheader("緊急度：高、重要度：高（今すぐ実行）")
-    high_high = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "高") & (st.session_state["tasks"]["緊急度"] == "高"])]
+    high_high = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "高") & (st.session_state["tasks"]["緊急度"] == "高")]
     st.table(high_high.reset_index(drop=True))
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
     st.markdown('<div class="column2">', unsafe_allow_html=True)
     st.subheader("緊急度：低、重要度：高（計画を立てる）")
-    high_low = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "高") & (st.session_state["tasks"]["緊急度"] == "低"])]
+    high_low = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "高") & (st.session_state["tasks"]["緊急度"] == "低")]
     st.table(high_low.reset_index(drop=True))
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col3:
-    st.markdown('<divの="column3">', unsafe_allow_html=True)
+    st.markdown('<div class="column3">', unsafe_allow_html=True)
     st.subheader("緊急度：高、重要度：低（委任する）")
-    low_high = st.session_state["tasks"][(st.session_state["重要度"]["重要度"] == "低") & (st.session_state["tasks"]["緊急
+    low_high = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "低") & (st.session_state["tasks"]["緊急度"] == "高")]
+    st.table(low_high.reset_index(drop=True))
+    st.markdown('</div>', unsafe_allow_html=True)
+
+with col4:
+    st.markdown('<div class="column4">', unsafe_allow_html=True)
+    st.subheader("緊急度：低、重要度：低（削除する）")
+    low_low = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "低") & (st.session_state["tasks"]["緊急度"] == "低")]
+    st.table(low_low.reset_index(drop=True))
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# コメント
+st.write("""
+**使い方**:
+- タスクを入力し、重要度と緊急度を選択してください。
+- "タスクを追加"ボタンを押すと、タスクが追加され、アイゼンハワーのマトリクスに自動的に分類されます。
+""")
