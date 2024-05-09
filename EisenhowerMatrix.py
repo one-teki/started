@@ -35,7 +35,6 @@ with st.form("task_form"):
 
     # フォームの送信ボタン
     submitted = st.form_submit_button("タスクを追加")
-    cleared = st.form_submit_button("クリア")
 
 # フォームが送信されたら、タスクをデータフレームに追加
 if submitted and task:
@@ -67,20 +66,20 @@ with col2:
 
 with col3:
     st.subheader("緊急度：高、重要度：低（委任する）")
-    low_high = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "低") & (st.session_state["tasks"]["緊急度"] == "高")]
+    low_high = st.session_state["tasks"][(st.session_state["重要度"] == "低") & (st.session_state["緊急度"] == "高")]
     st.table(low_high.reset_index(drop=True))
     if st.button("クリア（委任する）", key="clear_low_high"):
         st.session_state["tasks"] = st.session_state["tasks"][
-            (st.session_state["tasks"]["重要度"] != "低") | (st.session_state["tasks"]["緊急度"] != "高")
+            (st.session_state["重要度"] != "低") | (st.session_state["緊急度"] != "高")
         ]
 
 with col4:
     st.subheader("緊急度：低、重要度：低（削除する）")
-    low_low = st.session_state["tasks"][(st.session_state["tasks"]["重要度"] == "低") & (st.session_state["tasks"]["緊急度"] == "低")]
+    low_low = st.session_state["tasks"][(st.session_state["重要度"] == "低") & (st.session_state["緊急度"] == "低")]
     st.table(low_low.reset_index(drop=True))
     if st.button("クリア（削除する）", key="clear_low_low"):
         st.session_state["tasks"] = st.session_state["tasks"][
-            (st.session_state["tasks"]["重要度"] != "低") | (st.session_state["tasks"]["緊急度"] != "低")
+            (st.session_state["重要度"] != "低") | (st.session_state["緊急度"] != "低")
         ]
 
 # 全タスク削除ボタン
