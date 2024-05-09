@@ -40,8 +40,8 @@ if submitted and task:
 
 # アイゼンハワーのマトリクス表示
 st.header("アイゼンハワーのマトリクス")
-col1, col2 = st.columns([1, 1], gap="medium", key="col1_col2")
-col3, col4 = st.columns([1, 1], gap="medium", key="col3_col4")
+col1, col2 = st.columns([1, 1], gap="medium")
+col3, col4 = st.columns([1, 1], gap="medium")
 
 with col1:
     st.markdown('<div class="column1">', unsafe_allow_html=True)
